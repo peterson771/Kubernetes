@@ -18,10 +18,10 @@
     - kubectl get replicaset -o wide
 
 # Aumentando ou dimiuindo o numero de replicas.
-  - kubectl scale replicaset primeiro-replicaset --replicas=10
-  - kubectl get pods
-  - kubectl scale replicaset primeiro-replicaset --replicas=2
-  - kubectl get pods
+    - kubectl scale replicaset primeiro-replicaset --replicas=10
+    - kubectl get pods
+    - kubectl scale replicaset primeiro-replicaset --replicas=2
+    - kubectl get pods
 
 # Deletando um replicaset
-  - kubectl delete replicaset primeiro-replicaset
+    - kubectl delete replicaset primeiro-replicaset
