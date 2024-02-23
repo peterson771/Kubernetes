@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: primeiro-replicaset
+  labels:
+    app: primeiro-replicaset
+spec:
+  selector:
+    matchLabels:
+      env: primeiro-replicaset
+  replicas: 3
+  template:
+    metadata:
+      name: nginx-2
+      labels:
+        env: primeiro-replicaset
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "256m"
