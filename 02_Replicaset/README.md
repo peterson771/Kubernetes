@@ -8,20 +8,20 @@
 
 # Comandos úteis
 
-- Verificação dos Replicaset
+# Verificação dos Replicaset
     - kubectl get replicaset
     - kubectl get replicaset --all-namespaces
 
-- Criando Replicaset através de um arquivo Yaml (replicaset.yaml)
+# Criando Replicaset através de um arquivo Yaml (replicaset.yaml)
     - kubectl apply -f replicaset.yaml
     - kubectl describe replicaset primeiro-replicaset
     - kubectl get replicaset -o wide
 
-- Aumentando ou dimiuindo o numero de replicas.
+# Aumentando ou dimiuindo o numero de replicas.
   - kubectl scale replicaset primeiro-replicaset --replicas=10
   - kubectl get pods
   - kubectl scale replicaset primeiro-replicaset --replicas=2
   - kubectl get pods
 
-- Deletando um replicaset
+# Deletando um replicaset
   - kubectl delete replicaset primeiro-replicaset
