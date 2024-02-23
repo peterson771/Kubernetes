@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: fontend
+spec:
+  selector:
+    matchLabels:
+      env: produnction
+  replicas: 5
+  template:
+    metadata:
+      name: nginx-2
+      labels:
+        env: production
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx # podemos alterar a imagem para fazermos testes no Deployment (nginx:1.18.0 ou nginx:1.20.2)
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "256m"
