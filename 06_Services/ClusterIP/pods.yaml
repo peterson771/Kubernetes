@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: web-pod
+  labels:
+    type: web-app
+spec:
+  containers:
+    - name: web-server-apache
+      image: httpd
+      ports:
+       - containerPort: 80
+    - name: web-server-tomcat
+      image: tomcat
+      ports: 
+       - containerPort: 8080
+      resources:
+      limits: # limite de recursos utilizado no pod
+        memory: "128Mi"
+        cpu: "500m"
+
+      
