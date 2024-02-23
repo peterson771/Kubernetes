@@ -9,7 +9,7 @@ spec:
   - name: primeiro-pod
     image: nginx
     resources:
-      limits:
+      limits: # limite de recursos utilizado no pod
         memory: "128Mi"
         cpu: "500m"
 
