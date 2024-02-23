@@ -18,3 +18,7 @@
 
 - Deletando PODs
   - kubectl delete pods meu-primeiro-pod
+
+- Criando POD através de um arquivo Yaml (pod.yaml)
+    - kubectl apply -f pod.yaml
+    - kubectl describe pod primeiro-pod

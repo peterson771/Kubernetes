@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: primeiro-pod
+  labels:
+    name: primeiro-pod
+spec:
+  containers:
+  - name: primeiro-pod
+    image: nginx
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+
