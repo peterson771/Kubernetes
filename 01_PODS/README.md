@@ -9,7 +9,7 @@
 # Comandos úteis
 
 - Verificação dos PODs
-    - kubectl get pods
+      - kubectl get pods
     - kubectl get pods --all-namespace
 
 
