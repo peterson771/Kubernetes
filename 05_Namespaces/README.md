@@ -17,7 +17,7 @@
 
 # Criando um namespace através de um arquivo yaml
 
-    -kubectl apply -f backend-namespace.yaml
+    - kubectl apply -f backend-namespace.yaml
     - kubectl get namespace
     - kubectl apply -f redis-pod.yaml --namespace=backend-ns
     - kubectl apply -f tomcat-pod.yaml --namespace=backend
