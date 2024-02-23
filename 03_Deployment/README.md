@@ -23,13 +23,13 @@
          - kubectl rollout history deployment/frontend-deployment
 
 # Rollback
-  - Com o Rollback conseguimos voltar a uma atualização aplicada no Deployment
+ - Com o Rollback conseguimos voltar a uma atualização aplicada no Deployment
 
-  - Listando as altrações com o comando:
+   - Listando as altrações com o comando:
             - kubectl rollout history deployment/frontend-deployment
 
   - Pegando as informações que foram feitas em umas das atualizações
-            - kubectl rollout history deployment/frontend-deployment --revision=2
+         - kubectl rollout history deployment/frontend-deployment --revision=2
 
   - Com o comando undo voltamos o estado do nosso deployment após a atualizção:
             - kubectl rollout undo deployment/frontend-deployment
