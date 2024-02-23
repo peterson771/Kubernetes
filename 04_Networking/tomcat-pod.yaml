@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tomcat-pod
+  labels:
+    apps: app-java
+spec:
+  containers:
+    - name: container-tomcat
+      image: tomcat
+      resources:
+        limits: # limite de recursos utilizado no pod
+          memory: "128Mi"
+          cpu: "500m"
+
