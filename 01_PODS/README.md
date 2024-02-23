@@ -9,16 +9,17 @@
 # Comandos úteis
 
 - Verificação dos PODs
-      - kubectl get pods
-      - kubectl get pods --all-namespaces
+    - kubectl get pods
+    - kubectl get pods --all-namespace
+
 
 - Criação PODs
     - kubectl run meu-primeiro-pod --image httpd
     - kubectl get pods -o wide
 
 - Deletando PODs
-    - kubectl delete pods meu-primeiro-pod
+     - kubectl delete pods meu-primeiro-pod
 
 - Criando POD através de um arquivo Yaml (pod.yaml)
-      - kubectl apply -f pod.yaml
-      - kubectl describe pod primeiro-pod
+     - kubectl apply -f pod.yaml
+     - kubectl describe pod primeiro-pod
