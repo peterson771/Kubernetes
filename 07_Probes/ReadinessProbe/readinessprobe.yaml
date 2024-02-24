@@ -5,7 +5,7 @@ metadata:
     app: nginx-deployment
   name: nginx-deployment
 spec:
-  replicas: 10
+  replicas: 3
   selector:
     matchLabels:
       app: nginx-deployment
@@ -16,20 +16,22 @@ spec:
         app: nginx-deployment
     spec:
       containers:
-      - image: nginx:1.20.2
+      - image: nginx:1.19.2
         name: nginx
         resources:
           limits:
             cpu: "0.5"
             memory: 256Mi
           requests:
-            cpu: "0.50"
+            cpu: "0.25"
             memory: 128Mi
-        livenessProbe: 
-          httpGet: # Protocolo http
-            path: / 
-            port: 80 # 
+        readinessProbe: # Inicio da Probe
+          httpGet: #  # Protocolo http
+            path: / # O caminho que iremos testar
+            port: 80 # A porta que iremos testar
           initialDelaySeconds: 10 # Tempo para primeira verificção
           periodSeconds: 10 # De quanto em quanto tempo vamos verificar
           timeoutSeconds: 5 # Tempo para considerar a falha
-          failureThreshold: 3 # Erro para reiniciar o container
+          successThreshold: 2 # Numero de vezes que vamos testar o container
+          failureThreshold: 5 # Erro para reiniciar o container
+
