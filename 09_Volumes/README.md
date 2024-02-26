@@ -15,16 +15,15 @@
 
 
 ### HostPath
-   - Diferente do Empytidir ele mantém os arquivos mesmo após o restart e deleção do POD. 
-   O diretório fica armazenado dentro do cluster e não do POD
+   - Diferente do Empytidir ele mantém os arquivos mesmo após o restart e deleção do POD, o diretório fica armazenado dentro do cluster e não do POD
 
-        - kubectl apply -f volumes-persist.yaml
-        - kubectl get pods 
-        - kubectl exec -it redis-pod2 -- /bin/bash
-        - cd /my-volume
-        - echo "Teste hostpah" > teste.txt
-        - kubectl delete pod redis-pod2
-        - kubectl apply -f volumes-persist.yaml
+         - kubectl apply -f volumes-persist.yaml
+         - kubectl get pods 
+         - kubectl exec -it redis-pod2 -- /bin/bash
+         - cd /my-volume
+         - echo "Teste hostpah" > teste.txt
+         - kubectl delete pod redis-pod2
+         - kubectl apply -f volumes-persist.yaml
 
 
 
