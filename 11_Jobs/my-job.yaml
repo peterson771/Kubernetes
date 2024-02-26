@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  completions: 10 # Numero de Jobs 
+  completionMode: "Indexed"
+  parallelism: 5
+  activeDeadlineSeconds: 15
+  template: # Expecificacoes do POD
+    metadata:
+      name: my-job-pod
+    spec:
+      containers:
+      - name: my-container-busybox
+        image: busybox
+        command:
+        - "bin/sh"
+        - "-c"
+        - "for i in 1 2 3 4 5 6; do echo Seu número da sorte é: $i = $((1 + RANDOM % 70)); done"
+      restartPolicy: Never
