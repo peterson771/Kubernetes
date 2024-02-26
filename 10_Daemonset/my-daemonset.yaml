@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+  labels:
+    app: frontend
+
+spec:
+  template: # Spec do Deamonset
+    metadata:
+      name: pod-web-server
+      labels:
+        apps: my-app
+        tier: frontend
+    spec: # Spec do POD
+      containers:
+        - name: my-container-nginx
+          image: nginx
+
+  selector:
+    matchLabels:
+      apps: my-app
+

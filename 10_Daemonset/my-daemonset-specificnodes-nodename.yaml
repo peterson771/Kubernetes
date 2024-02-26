@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+  labels:
+    app: frontend
+
+spec: # Spec do Deamonset
+  template:
+    metadata:
+      name: pod-web-server
+      labels:
+        apps: my-app
+        tier: frontend
+    spec:  # Spec do POD
+      containers:
+        - name: my-container-nginx
+          image: nginx
+      nodeName: minikube # Nome do NODES onde esse Daemonset vai ser criado.
+        
+      resources:
+      limits: # limite de recursos utilizado no pod
+        memory: "128Mi"
+        cpu: "500m"
+
+
+  selector:
+    matchLabels:
+      apps: my-app
+

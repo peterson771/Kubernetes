@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-daemonset
+  labels:
+    app: frontend
+
+spec: # Spec do Deamonset
+  updateStrategy: # Definindo a estratégia de update do
+    type: RollingUpdate
+      rollingUpdate:
+        maxUnavailable: 1     
+  template:
+    metadata:
+      name: pod-web-server
+      labels:
+        apps: my-app
+        tier: frontend
+    spec: # Spec do POD
+      containers:
+        - name: my-container-nginx
+          image: nginx
+      nodeSelector:
+        disktype: ssd # Label que marca os NODEES onde esse Daemonset vai ser criado.
+      resources:
+      limits: # limite de recursos utilizado no pod
+        memory: "128Mi"
+        cpu: "500m"
+  selector:
+    matchLabels:
+      apps: my-app
+
