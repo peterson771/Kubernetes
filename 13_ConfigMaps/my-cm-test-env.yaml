@@ -1,0 +1,33 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: my-cm
+  namespace: default
+data:
+  #Configuracao database
+  database: mysql
+  database_uri: mysql://localhost:3306
+
+  #Configuracao da interface do usuario
+  font.title: Arial Bold
+  background-color: red
+  theme.1: clean
+  theme.2: dark
+---
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-cm-env
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    envFrom:
+    - configMapRef: # Referencia do Config maps que estou utilizando
+        name: my-cm # Idenfificação do Configmap mencionado na linha 4
+    resources:
+      limits: # limite de recursos utilizado no pod
+         memory: "128Mi"
+         cpu: "500m"
+
+

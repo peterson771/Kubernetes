@@ -1,0 +1,24 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: pod-cm-vol
+spec:
+  containers:
+  - name: my-container
+    image: nginx
+    resources:
+      limits: # limite de recursos utilizado no pod
+         memory: "128Mi"
+         cpu: "500m"
+    envFrom:
+    - configMapRef:
+        name: my-cm
+    volumeMounts:
+    - name: my-vol
+      mountPath: "/etc/my-vol"
+      readOnly: true
+
+  volumes:
+  - name: my-vol
+    configMap:
+      name: my-cm
