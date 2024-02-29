@@ -10,7 +10,7 @@
 
 - Criando um POD para testar o Endpointslice
 
-      - kubectl run it -image debian teste-endpointslice
+      - kubectl run -i --tty debian-pod --image=debian -- bash
       - apt update && apt install curl dnsutils -y
       - nslookup my-eps-service
       - curl my-endpoints-service.default.svc.cluster.local
