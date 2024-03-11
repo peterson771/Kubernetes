@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor 
+metadata: 
+  name: nginx-servicemonitor
+  labels: 
+    app: nginx # label que identifica o app
+spec: 
+  selector: # seletor para identificar os pods que serão monitorados
+    matchLabels: 
+      app: nginx # label que identifica o app que será monitorado
+  endpoints: 
+    - interval: 10s # intervalo 
+      path: /metrics # caminho para a requisição
+      targetPort: 9113 # porta do target
