@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1 
+kind: PrometheusRule 
+metadata: 
+  name: nginx-prometheus-rule
+  namespace: monitoring
+  labels: 
+    prometheus: k8s 
+    role: alert-rules 
+    app.kubernetes.io/name: kube-prometheus 
+    app.kubernetes.io/part-of: kube-prometheus 
+spec: # Especificação do recurso
+  groups: # Lista de grupos de regras
+  - name: nginx-prometheus-rule # Nome do grupo de regras
+    rules: 
+    - alert: NginxDown # Nome do alerta
+      expr: up{job="nginx"} == 0 # Expressão que será utilizada para disparar o alerta
+      for: 1m # Tempo 
+      labels: # Labels 
+        severity: critical 
+      annotations: # Anotações do alerta
+        summary: "Nginx is down" # Título do alerta
+        description: "Nginx is down for more than 1 minute. Pod name: {{ $labels.pod }}" # Descrição do alerta
+
+    - alert: NginxHighRequestRate # Nome do alerta
+        expr: rate(nginx_http_requests_total{job="nginx"}[5m]) > 100 # Expressão que será utilizada para disparar o alerta
+        for: 1m # Tempo 
+        labels: # Labels 
+            severity: warning 
+        annotations: # Anotações do alerta
+            summary: "Nginx is receiving high request rate" # Título do alerta
+            description: "Nginx is receiving high request rate for more than 1 minute. Pod name: {{ $labels.pod }}" # Descrição do alerta
+
+   - alert: HighMemoryUsage
+      expr: (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) < 0.3
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: High Memory Usage  # Título do alerta
+        description: Node memory is under 30% of total available memory.
