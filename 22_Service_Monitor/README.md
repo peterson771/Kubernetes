@@ -27,6 +27,8 @@
       kubectl get services
 
 ### Criando nosso Service Monitor
+
+  - Para fazer a monitoração de um POD basta alterar a linha de: *endpoints* para: *podMetricsEndpoints* .
     
       kubectl get servicemonitors
       kubectl -f apply -f nginx_servicemonitor.yaml
