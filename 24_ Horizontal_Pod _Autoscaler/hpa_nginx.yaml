@@ -1,0 +1,31 @@
+apiVersion: autoscaling/v2  
+kind: HorizontalPodAutoscaler    # Tipo de recurso que estamos definindo
+metadata:
+  name: nginx-deployment-hpa-cpu # Nome do HPA
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1             
+    kind: Deployment                 # Nome do serviço que ele vai monitorar 
+    name: nginx-deployment           # Nome do Deployment que ele vai cuidar
+  minReplicas: 3                     # Mínimo de réplicas
+  maxReplicas: 10                    # Máximo de réplicas
+  metrics:
+  - type: Resource                   
+    resource:
+      name: cpu                   # Monitorando CPU | Memoria = memory
+      target:
+        type: Utilization            # Tipo de alvo (utilização)
+        averageUtilization: 50       # Valor alvo (50% de utilização)
+  behavior: # Comportamento
+    scaleUp: # Politica da subida dos PODs
+      stabilizationWindowSeconds: 5  # Quando o consumo atingir 50% o HPA vai escalonar mais PODs em 5 segundos
+      policies:
+      - type: Percent                # Percentual
+        value: 100                   # Em 100% do consumo ele vai começar a subir
+        periodSeconds: 10            # A cada 10 segundos ele vai validar a política
+    scaleDown: # Politica da descida dos PODs
+      stabilizationWindowSeconds: 60  # Depois de 60 segundos da estabilização ele vai começar a reduzir os PODs
+      policies:
+      - type: Percent                  # Percentual
+        value: 100                     # Em 100% do consumo ele vai começar a descer
+        periodSeconds: 15              # Período da política (15 segundos)
