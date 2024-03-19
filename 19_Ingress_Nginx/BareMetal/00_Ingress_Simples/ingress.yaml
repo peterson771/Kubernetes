@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-simples
+spec:
+  ingressClassName: nginx #Vinculando o Nginx Ingress Controller
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: web-green
+            port:
+              number: 80                             
