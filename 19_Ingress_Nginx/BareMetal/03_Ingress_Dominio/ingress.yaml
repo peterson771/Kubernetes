@@ -1,0 +1,88 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-path
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx #Vinculando o Nginx Ingress Controller
+  rules:
+  - http:
+      paths: # São duas regras de redirecionamento diferentes Blue e Green
+      - path: /blue
+        pathType: Prefix
+        backend:
+          service:
+            name: web-blue
+            port:
+              number: 80
+      - path: /green
+        pathType: Prefix
+        backend:
+          service:
+            name: web-green
+            port:
+              number: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-default
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: nginx
+      port:
+        number: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-dominio
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules: 
+   - host: color.10.0.21.155.nip.io # Indo para default backend
+     http:   
+       paths: # São duas regras de redirecionamento diferentes Blue e Green
+       - path: /blue # http://color.10.0.21.155.nip.io/blue
+         pathType: Prefix
+         backend:
+           service:
+             name: web-blue
+             port:
+               number: 80
+       - path: /green # http://color.10.0.21.155.nip.io/green
+         pathType: Prefix
+         backend:
+           service:
+             name: web-green
+             port:
+               number: 80
+   - host: blue.10.0.21.155.nip.io # subdomínios
+     http:   
+       paths: 
+       - path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: web-blue
+             port:
+               number: 80
+   - host: green.10.0.21.155.nip.io # subdomínios
+     http:   
+       paths: 
+       - path: /
+         pathType: Prefix
+         backend:
+           service:
+             name: web-green
+             port:
+               number: 80
