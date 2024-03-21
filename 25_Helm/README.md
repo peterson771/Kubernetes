@@ -14,10 +14,12 @@
 
 - No Helm conseguimos adicionar repositórios para fazermos as instalações dos recursos assim como fazemos nas distribuições Linux.
 
-    helm repo add stable https://charts.helm.sh/stable
-    helm repo add jenkins https://charts.jenkins.io
-    helm repo update
-    helm repo list
+      helm repo add stable https://charts.helm.sh/stable
+      helm repo add jenkins https://charts.jenkins.io
+      helm repo update
+      helm repo list
 
-    helm repo remove jenkins
+      helm repo remove jenkins
+
+     
 
