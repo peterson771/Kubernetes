@@ -1,0 +1,26 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-resources-limits
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: validate-limits
+    match:
+      resources:
+        kinds:
+        - Pod
+    exclude:
+      resources:
+        namespaces:
+        - ProdTest # Essa Policy não vai ser aplicada no namespace ProdTest
+    validate:
+      message: "CPU and memory limits are required" # Mensagem informando o erro
+      pattern:
+        spec:
+          containers:
+          - name: "*"
+            resources:
+              limits:
+                cpu: "?*"
+                memory: "?*"
