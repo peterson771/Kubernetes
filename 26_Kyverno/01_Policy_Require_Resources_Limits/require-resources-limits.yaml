@@ -1,0 +1,22 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy #Policy para o Cluster inteiro
+metadata:
+  name: require-cpu-memory-limits
+spec:
+  validationFailureAction: enforce #Não é permitido.
+  rules:
+  - name: validate-limits
+    match:
+      resources: # Qual o tipo de seviço que vamos monitorar (Poderia ser Deployment, Services etc)
+        kinds:
+        - Pod
+    validate:
+      message: "CPU and memory limits are required" # Mensagem informando o erro
+      pattern: # Padrão que esperamos da regra
+        spec:
+          containers:
+          - name: "*"
+            resources:
+              limits:
+                memory: "?*"
+                cpu: "?*"
