@@ -1,0 +1,19 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-root-user
+spec:
+  validationFailureAction: Enforce # Forçando a regra
+  rules:
+  - name: check-runAsNonRoot
+    match:
+      resources:
+        kinds:
+        - Pod #Atuar no Pod
+    validate:
+      message: "Running as root is not allowed. Set runAsNonRoot to true." #Mensagem de erro.
+      pattern: # Padrão das regras
+        spec:
+          containers:
+          - securityContext:
+              runAsNonRoot: true # Desabilitando o root
