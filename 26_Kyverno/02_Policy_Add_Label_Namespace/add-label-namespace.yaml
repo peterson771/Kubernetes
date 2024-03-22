@@ -1,0 +1,16 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: add-label-namespace
+spec:
+  rules:
+  - name: add-label-ns
+    match: 
+      resources:
+        kinds: 
+        - Namespace #Atuar no namespace
+    mutate: # Não é uma validação é uma multação
+      patchStrategicMerge:
+        metadata:
+          labels: # Vai adicionar esse metadata em cada namespace
+            Cluster: "Prod"

@@ -1,10 +1,10 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy #Policy para o Cluster inteiro
 metadata:
-  name: require-cpu-memory-limits
+  name: require-cpu-memory-limits 
 spec:
   validationFailureAction: enforce #Não é permitido.
-  rules:
+  rules: # Regras 
   - name: validate-limits
     match:
       resources: # Qual o tipo de seviço que vamos monitorar (Poderia ser Deployment, Services etc)
