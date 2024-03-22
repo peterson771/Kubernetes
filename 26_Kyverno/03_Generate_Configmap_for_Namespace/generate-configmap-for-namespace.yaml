@@ -1,0 +1,20 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy #Policy para o Cluster inteiro
+metadata:
+  name: generate-configmap-for-namespace #Nome da Policy
+spec:
+  rules:
+    - name: generate-namespace-configmap
+      match:
+        resources:
+          kinds:
+            - Namespace #Atuar no namespace
+      generate: # A cada namespace criado vai ser configurado um novo Configmaps
+        apiVersion: v1
+        kind: ConfigMap
+        name: default-configmap
+        namespace: "{{request.object.metadata.name}}" #Atributo para criar o Configmaps dentro do Namespace
+        data:
+          data:
+            key1: "value1"
+            key2: "value2"
