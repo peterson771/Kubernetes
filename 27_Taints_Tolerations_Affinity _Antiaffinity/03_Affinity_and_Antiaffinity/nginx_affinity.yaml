@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginx
+  name: nginx
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+      affinity: #Affinity
+        nodeAffinity: # Escolher o node
+          requiredDuringSchedulingIgnoredDuringExecution: # Obrigatorio a regra do Affinity
+            nodeSelectorTerms: # Pegando a tags do Node
+            - matchExpressions: # 
+              - key: region # Label aplicada no Node
+                operator: In 
+                values:
+                - "sa-east-1"
